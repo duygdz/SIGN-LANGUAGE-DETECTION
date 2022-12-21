@@ -55,7 +55,7 @@ actions = np.array(['hello','thanks'])
 # 30 videos of data
 no_sequences = 10
 # 30 frames
-sequence_length = 60
+sequence_length = 30
 
 
 model=load_model('actions.h5')
@@ -77,7 +77,7 @@ threshold = 0.5
 
 cap = cv2.VideoCapture(0)
 # Set mediapipe model 
-with mp_holistic.Holistic(min_detection_confidence=0.4, min_tracking_confidence=0.5) as holistic:
+with mp_holistic.Holistic(min_detection_confidence=0.7, min_tracking_confidence=0.5) as holistic:
     while cap.isOpened():
 
         # Read feed
@@ -93,9 +93,9 @@ with mp_holistic.Holistic(min_detection_confidence=0.4, min_tracking_confidence=
         # 2. Prediction logic
         keypoints = extract_keypoints(results)
         sequence.append(keypoints)
-        sequence = sequence[-60:]
+        sequence = sequence[-30:]
         
-        if len(sequence) == 60:
+        if len(sequence) == 30:
             res = model.predict(np.expand_dims(sequence, axis=0))[0]
             print(actions[np.argmax(res)])
             predictions.append(np.argmax(res))
