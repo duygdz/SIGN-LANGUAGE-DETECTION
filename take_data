@@ -45,7 +45,7 @@ actions = np.array(['hello', 'thanks'])
 no_sequences = 10
 
 # Videos are going to be 30 frames in length
-sequence_length = 60
+sequence_length = 30
 
 # Folder start
 
